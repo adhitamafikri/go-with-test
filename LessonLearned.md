@@ -1,7 +1,7 @@
 # Lesson Learned
 This document contains the things that I actually pickup when following through this `Learn Go with tests` curriculum
 
-## The Concept of Test
+## The Concepts of Test
 - It is important for the test files to have the naming like `some_name_test.go`. The `_test.go` suffix is the key. Because it will be automatically picked up by the testing sytem to be executed
 - We can think of your typical testing structure when using any testing tool in JS/TS project. You have **test suites** and **test cases**
     - The **test suites** are the functions in the testing file. Example: `TestingHello`, `TestingAddition`, `TestingSubstraction`
@@ -37,3 +37,10 @@ This document contains the things that I actually pickup when following through 
     - Having functions with the name like `ExampleFunctionName_someIdentifier`.
         - The `_someIdentifier` here could be anything like `_bigNumber`, `_maskingEmail`, `_negativeAndPositiveNumOps`, .etc
         - The `_someIdentifier` could not be started with non alphabet chars, it will raise an error. Example: `ExampleFunctionName_1`, `ExampleFunctionName_#something`
+
+## Benchmarking
+Read: [Benchmarking](https://pkg.go.dev/testing#hdr-Benchmarks)
+
+- We can do *benchmarking* alongside testing the actual behavior of the function
+- The benchmark function naming convention is `Benchmark` + `FunctionNameInPackage`
+- The benchmark could be run by executing `go test -bench=.` command in your terminal. It could also be used in conjunction with the `-v` flag so it will produce verbose test result plus the benchmark result. Example `go run test -v -bench=.`
