@@ -1,7 +1,7 @@
-.PHONY: exec
-exec:
+.PHONY: hello_world
+hello_world:
 	@go version
-	@go run ./cmd/main.go
+	@cd 001_hello_world && go test
 
 .PHONY: lint
 lint:
