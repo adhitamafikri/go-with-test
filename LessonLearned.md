@@ -33,3 +33,7 @@ This document contains the things that I actually pickup when following through 
         // Output: "Santo Hara"
     }
     ```
+- We can have multiple `Testable Examples` in our test file for any functions in the package by doing this:
+    - Having functions with the name like `ExampleFunctionName_someIdentifier`.
+        - The `_someIdentifier` here could be anything like `_bigNumber`, `_maskingEmail`, `_negativeAndPositiveNumOps`, .etc
+        - The `_someIdentifier` could not be started with non alphabet chars, it will raise an error. Example: `ExampleFunctionName_1`, `ExampleFunctionName_#something`

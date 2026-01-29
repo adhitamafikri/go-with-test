@@ -21,3 +21,15 @@ func ExampleAdd() {
 	fmt.Println(sum)
 	// Output: 29
 }
+
+func ExampleAdd_minusAndPositive() {
+	sum := Add(-20, 65)
+	fmt.Println(sum)
+	// Output: 45
+}
+
+func ExampleAdd_largeNumbers() {
+	sum := Add(5000, 750)
+	fmt.Println(sum)
+	// Output: 5750
+}
