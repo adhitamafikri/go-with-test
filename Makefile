@@ -27,3 +27,8 @@ arrays_slices:
 structs_methods_interfaces:
 	@go version
 	@cd 005_structs_methods_interfaces && go test -v -bench=. -benchmem -cover
+
+.PHONY: pointers_and_errors
+pointers_and_errors:
+	@go version
+	@cd 006_pointers_and_errors && go test -v -bench=. -benchmem -cover

@@ -6,4 +6,5 @@ use (
 	./003_iterations
 	./004_arrays_slices
 	./005_structs_methods_interfaces
+	./006_pointers_and_errors
 )
