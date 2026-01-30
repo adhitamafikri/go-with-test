@@ -32,3 +32,8 @@ structs_methods_interfaces:
 pointers_and_errors:
 	@go version
 	@cd 006_pointers_and_errors && go test -v -bench=. -benchmem -cover
+
+.PHONY: maps
+maps:
+	@go version
+	@cd 007_maps && go test -v -bench=. -benchmem -cover
