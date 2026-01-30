@@ -5,4 +5,5 @@ use (
 	./002_integers
 	./003_iterations
 	./004_arrays_slices
+	./005_structs_methods_interfaces
 )

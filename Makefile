@@ -22,3 +22,8 @@ iterations:
 arrays_slices:
 	@go version
 	@cd 004_arrays_slices && go test -v -bench=. -benchmem -cover
+
+.PHONY: structs_methods_interfaces
+structs_methods_interfaces:
+	@go version
+	@cd 005_structs_methods_interfaces && go test -v -bench=. -benchmem -cover
