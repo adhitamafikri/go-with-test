@@ -10,6 +10,19 @@ MODULE_NUMBER=$1
 MODULE_NAME=$2
 MODULE_DIR="${MODULE_NUMBER}_${MODULE_NAME}"
 
+to_pascal_case() {
+    local name=$1
+    local result=""
+    local IFS='_'
+    read -ra parts <<< "$name"
+    for part in "${parts[@]}"; do
+        if [ -n "$part" ]; then
+            result="${result}$(echo "${part:0:1}" | tr '[:lower:]' '[:upper:]')${part:1}"
+        fi
+    done
+    echo "$result"
+}
+
 if [ -d "$MODULE_DIR" ]; then
     echo "Error: Directory '$MODULE_DIR' already exists"
     exit 1
@@ -20,11 +33,49 @@ echo "Creating module: $MODULE_DIR"
 mkdir -p "$MODULE_DIR"
 cd "$MODULE_DIR" || exit 1
 
-touch "${MODULE_NAME}.go"
-touch "${MODULE_NAME}_test.go"
+cat <<'EOF' > "${MODULE_NAME}.go"
+package __MODULE_NAME__
+
+func __PASCAL_CASE__() string {
+	return "__MODULE_NAME__"
+}
+EOF
+
+sed -i '' "s/__MODULE_NAME__/${MODULE_NAME}/g" "${MODULE_NAME}.go"
+PASCAL_CASE_NAME=$(to_pascal_case "$MODULE_NAME")
+sed -i '' "s/__PASCAL_CASE__/${PASCAL_CASE_NAME}/g" "${MODULE_NAME}.go"
+
+cat <<'EOF' > "${MODULE_NAME}_test.go"
+package __MODULE_NAME__
+
+import (
+	"testing"
+)
+
+func Test__PASCAL_CASE__(t *testing.T) {
+	result := __PASCAL_CASE__()
+	expected := "__MODULE_NAME__"
+	
+	if result != expected {
+		t.Errorf("Expected: %q, got: %q", expected, result)
+	}
+}
+EOF
+
+sed -i '' "s/__MODULE_NAME__/${MODULE_NAME}/g" "${MODULE_NAME}_test.go"
+sed -i '' "s/__PASCAL_CASE__/${PASCAL_CASE_NAME}/g" "${MODULE_NAME}_test.go"
 
 mkdir -p cmd
-touch cmd/main.go
+cat <<'EOF' > cmd/main.go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Printf("Hello, __MODULE_NAME__!\n")
+}
+EOF
+sed -i '' "s/__MODULE_NAME__/${MODULE_NAME}/g" cmd/main.go
 
 go mod init "$MODULE_NAME"
 
