@@ -44,3 +44,15 @@ Read: [Benchmarking](https://pkg.go.dev/testing#hdr-Benchmarks)
 - We can do *benchmarking* alongside testing the actual behavior of the function
 - The benchmark function naming convention is `Benchmark` + `FunctionNameInPackage`
 - The benchmark could be run by executing `go test -bench=.` command in your terminal. It could also be used in conjunction with the `-v` flag so it will produce verbose test result plus the benchmark result. Example `go run test -v -bench=.`
+
+## Dependency Injection
+> Learned how to implement DI without using any framework
+Directory: 008_dependency_injection
+
+## Printf and Fprintf quirks
+- `Printf` will send the output to the `stdout`
+- `Fprintf` allows us to print the output into any writer that implements `io.Writer` interface like:
+    - Writing to files
+    - Writing to buffers
+    - Network responses
+    - Any custom destinations

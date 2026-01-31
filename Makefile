@@ -37,3 +37,8 @@ pointers_and_errors:
 maps:
 	@go version
 	@cd 007_maps && go test -v -bench=. -benchmem -cover
+
+.PHONY: dependency_injection
+dependency_injection:
+	@go version
+	@cd 008_dependency_injection && go test -v -bench=. -benchmem -cover

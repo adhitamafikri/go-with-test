@@ -79,7 +79,7 @@ func TestDictionaryRemove(t *testing.T) {
 func assertValue(t testing.TB, result string, expected string) {
 	t.Helper()
 	if result != expected {
-		t.Errorf("Expected: %q, got: %q", result, expected)
+		t.Errorf("Expected: %q, got: %q", expected, result)
 	}
 }
 
