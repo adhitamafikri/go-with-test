@@ -9,4 +9,5 @@ use (
 	./006_pointers_and_errors
 	./007_maps
 	./008_dependency_injection
+	./009_mocking
 )

@@ -42,3 +42,8 @@ maps:
 dependency_injection:
 	@go version
 	@cd 008_dependency_injection && go test -v -bench=. -benchmem -cover
+
+.PHONY: mocking
+mocking:
+	@go version
+	@cd 009_mocking && go test -v -bench=. -benchmem -cover
