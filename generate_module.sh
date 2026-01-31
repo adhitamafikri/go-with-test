@@ -36,4 +36,13 @@ else
     awk -v module="./$MODULE_DIR" '/use \(/ { use=1 } use && /^\)/ { print "\t" module; use=0 } 1' go.work > go.work.tmp && mv go.work.tmp go.work
 fi
 
+echo "Adding make target to Makefile..."
+cat >> Makefile <<EOF
+
+.PHONY: ${MODULE_NAME}
+${MODULE_NAME}:
+	@go version
+	@cd ${MODULE_DIR} && go test -v -bench=. -benchmem -cover
+EOF
+
 echo "Module $MODULE_DIR created successfully!"

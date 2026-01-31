@@ -38,6 +38,13 @@ This document contains the things that I actually pickup when following through 
         - The `_someIdentifier` here could be anything like `_bigNumber`, `_maskingEmail`, `_negativeAndPositiveNumOps`, .etc
         - The `_someIdentifier` could not be started with non alphabet chars, it will raise an error. Example: `ExampleFunctionName_1`, `ExampleFunctionName_#something`
 
+## Useful Testing Command Flags
+- `-v` -> produce verbose output. Prefer to always use this so we can easily spot which cases are succeeded or failed
+- `-bench` -> run benchmark on a test file to figure out the time it takes for any operations to be done per nanosecond
+- `-benchmem` -> run benchmark on a test file to figure out the size being allocated by Go to the memory when executing any operations
+- `-cover` -> display percentage of lines of code being covered in the test
+- `-race` -> a race detector, that can be used to detect race conditions that might happen in our program
+
 ## Benchmarking
 Read: [Benchmarking](https://pkg.go.dev/testing#hdr-Benchmarks)
 
@@ -56,3 +63,30 @@ Directory: 008_dependency_injection
     - Writing to buffers
     - Network responses
     - Any custom destinations
+
+## Concurrency
+> The primary goal of implementing concurrency is to have several process running concurrently.
+Making the process execution non-blocking and faster
+
+- You have to leverage `channels` and `goroutines`
+- `goroutine` is a separate process in Go that allows us to execute without blocking
+    - You can tell Go to start a new `goroutine` by turning a function call into `go` statement in front of a function call like this. (Basically all you need to do is to wrap the statements that will be run concurrently with an immediately invoked `go func() {}` anonymous function)
+    ```go
+    func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
+        results := make(map[string]bool)
+
+        for _, url := range urls {
+            // run goroutines here
+            go func() {
+                results[url] = wc(url)
+            }()
+        }
+
+        return results
+    }
+    ```
+    - It is hard to predict what's going to happen on the concurrently running processes, so we have carefully handle them
+- `channels` are a Go data structure that could both receive and send values. This also allows communication between different processes
+    - `channels` are used to coordinate our `goroutines` to prevent race conditions
+    - Send statement -> `channelName <- doSomething()`
+    - Receive statement -> `result := <-channelName`

@@ -47,3 +47,8 @@ dependency_injection:
 mocking:
 	@go version
 	@cd 009_mocking && go test -v -bench=. -benchmem -cover
+
+.PHONY: concurrency
+concurrency:
+	@go version
+	@cd 010_concurrency && go test -v -race -bench=. -benchmem -cover
