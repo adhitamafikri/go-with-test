@@ -1,5 +1,9 @@
 # Lesson Learned
 
+Site: [https://quii.gitbook.io/learn-go-with-tests](https://quii.gitbook.io/learn-go-with-tests)
+
+---
+
 This document contains the things that I actually pickup when following through this `Learn Go with tests` curriculum
 
 ## The Concepts of Test
@@ -127,3 +131,26 @@ More on [https://gobyexample.com/select](https://gobyexample.com/select)
   - Closing server
   - Closing files
   - Test Teardown, Cleaning up test mocks
+
+
+## Reflection
+
+> This can be used to inspect the information/metadata of a variable. It can be used purely for inspection or manipulation
+
+- Only use `reflection` when we really need to. Typically used for "polymorphic functions", which are the functions having parameters that can be of any type/multiple types (`interface{}` type of parameters)
+- The most important function from the `reflect` package are `reflect.ValueOf` and `reflect.TypeOf`
+- Need to be careful when using `val.Field()`. A value **might not have fields at all** or we are trying to access non-existent fields (example: the value has 3 fields, we are trying to access the 4th field), this will cause a panic
+- We can also use `field.Kind()` to get the kind of type data of the given value
+- We can use `reflect.<TypeData>` to compare the value produced by `field.Kind()`, useful to check the exact data type of a value
+- We can use `field.Interface()` to get the interface value. Useful when we want to get the value of nested interfaces for inspection or manipulation purposes
+- If the function receives **pointer** as parameter value, we need to get the actual value element by using `val.Elem()`. Without doing this the program will panic
+- We cannot access `NumField` on a slice, they will raise error. The safest way to work with slice is to check if the value kind is of `reflect.Slice`, iterate each value, and extract the value interface by doing `val.Index(i).interface()`
+- Arrays can be handled the same way as slices
+- We have to be careful with `maps`, because Go can't guarantee order of the items in the map
+- Handling `channel` is a bit tricky. You need to use `val.Recv()` which receives and returns value from the channel
+- You might need to do recursive traversal if complex reflection operations are needed
+
+More on:
+- [https://dasarpemrogramangolang.novalagung.com/A-reflect.html](https://dasarpemrogramangolang.novalagung.com/A-reflect.html)
+- [https://pkg.go.dev/reflect](https://pkg.go.dev/reflect)
+- [https://pkg.go.dev/reflect#Value.Recv](https://pkg.go.dev/reflect#Value.Recv)

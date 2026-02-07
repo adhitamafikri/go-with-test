@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func AssertValue(t testing.TB, result string, expected string) {
+func AssertValue(t testing.TB, result interface{}, expected interface{}) {
 	t.Helper()
 	if result != expected {
 		t.Errorf("Expected: %q, got: %q", expected, result)
@@ -16,6 +16,21 @@ func AssertValueDeepEqual(t testing.TB, result interface{}, expected interface{}
 	t.Helper()
 	if !reflect.DeepEqual(expected, result) {
 		t.Errorf("Expected: %v, got: %v", expected, result)
+	}
+}
+
+func AssertContains(t testing.TB, haystack []string, needle string) {
+	t.Helper()
+	contains := false
+
+	for _, item := range haystack {
+		if item == needle {
+			contains = true
+		}
+	}
+
+	if !contains {
+		t.Errorf("expected %v to contain %q but it didn't", haystack, needle)
 	}
 }
 

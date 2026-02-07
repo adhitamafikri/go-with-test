@@ -3,6 +3,11 @@ lint:
 	@which golangci-lint
 	@golangci-lint run
 
+.PHONY: generate_module
+generate_module:
+	@chmod +x ./scripts/generate_module.sh
+	@./scripts/generate_module.sh $(MODULE_NUMBER) $(MODULE_NAME)
+
 .PHONY: hello_world
 hello_world:
 	@go version
@@ -57,3 +62,8 @@ concurrency:
 select:
 	@go version
 	@cd 011_select && go test -v -bench=. -benchmem -cover
+
+.PHONY: reflection
+reflection:
+	@go version
+	@cd 12_reflection && go test -v -bench=. -benchmem -cover
