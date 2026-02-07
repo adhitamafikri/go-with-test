@@ -154,3 +154,27 @@ More on:
 - [https://dasarpemrogramangolang.novalagung.com/A-reflect.html](https://dasarpemrogramangolang.novalagung.com/A-reflect.html)
 - [https://pkg.go.dev/reflect](https://pkg.go.dev/reflect)
 - [https://pkg.go.dev/reflect#Value.Recv](https://pkg.go.dev/reflect#Value.Recv)
+
+
+## Sync
+
+> Synchronization primitives such as mutual exclusion locks. Aims to improve the safety in concurrent environment
+
+| Type | Purpose |
+|------|---------|
+| Mutex | Mutual exclusion lock - protects shared data |
+| RWMutex | Reader/writer lock - multiple readers or one writer |
+| WaitGroup | Waits for a collection of goroutines to finish |
+| Once | Ensures code runs exactly once |
+| Pool | Thread-safe object pool for reuse |
+| Cond | Condition variable for signaling |
+| Map | Thread-safe map (concurrent reads/writes) |
+
+- `Mutex` ensures that only one goroutine can increment a value at a time.
+- `Mutex` must not be copied after the 1st use. Remember to 
+- Run `go vet` in build scripts to get alert about subtle bugs
+- Make sure to pass the struct by reference instead of by value. The latter would cause the caller function to ctry and create a copy of the mutex
+
+More on:
+- [https://pkg.go.dev/sync](https://pkg.go.dev/sync)
+- [https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/sync](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/sync)

@@ -13,4 +13,5 @@ use (
 	./010_concurrency
 	./011_select
 	./12_reflection
+	./13_go_sync
 )

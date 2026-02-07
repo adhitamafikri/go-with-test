@@ -67,3 +67,13 @@ select:
 reflection:
 	@go version
 	@cd 12_reflection && go test -v -bench=. -benchmem -cover
+
+.PHONY: sync
+sync:
+	@go version
+	@cd 13_sync && go test -v -bench=. -benchmem -cover
+
+.PHONY: go_sync
+go_sync:
+	@go version
+	@cd 13_go_sync && go test -v -bench=. -benchmem -cover
