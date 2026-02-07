@@ -52,3 +52,8 @@ mocking:
 concurrency:
 	@go version
 	@cd 010_concurrency && go test -v -race -bench=. -benchmem -cover
+
+.PHONY: select
+select:
+	@go version
+	@cd 011_select && go test -v -bench=. -benchmem -cover
