@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mocking"
+	"github.com/adhitamafikri/go-with-test/mocking"
 	"os"
 	"time"
 )

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"dependency_injection"
 	"fmt"
+	"github.com/adhitamafikri/go-with-test/dependency_injection"
 	"log"
 	"net/http"
 	"os"

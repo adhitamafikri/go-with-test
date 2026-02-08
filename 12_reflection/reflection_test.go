@@ -1,7 +1,7 @@
 package reflection
 
 import (
-	"reflection/test_utils"
+	"github.com/adhitamafikri/go-with-test/reflection/test_utils"
 	"testing"
 )
 

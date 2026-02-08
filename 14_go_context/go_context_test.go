@@ -3,7 +3,7 @@ package go_context
 import (
 	"context"
 	"errors"
-	"go_context/test_utils"
+	"github.com/adhitamafikri/go-with-test/go_context/test_utils"
 	"log"
 	"net/http"
 	"net/http/httptest"

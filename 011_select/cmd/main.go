@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"web_racer"
+	"github.com/adhitamafikri/go-with-test/web_racer"
 )
 
 func main() {

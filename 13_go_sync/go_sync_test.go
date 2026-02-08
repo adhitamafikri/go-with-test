@@ -1,7 +1,7 @@
 package go_sync
 
 import (
-	"go_sync/test_utils"
+	"github.com/adhitamafikri/go-with-test/go_sync/test_utils"
 	"sync"
 	"testing"
 )

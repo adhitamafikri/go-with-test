@@ -1,7 +1,7 @@
 package concurrency
 
 import (
-	"concurrency/test_utils"
+	"github.com/adhitamafikri/go-with-test/concurrency/test_utils"
 	"testing"
 	"time"
 )

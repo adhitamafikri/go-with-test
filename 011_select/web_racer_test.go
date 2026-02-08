@@ -1,11 +1,11 @@
 package web_racer
 
 import (
+	"github.com/adhitamafikri/go-with-test/web_racer/test_utils"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
-	"web_racer/test_utils"
 )
 
 func TestWebRacer(t *testing.T) {

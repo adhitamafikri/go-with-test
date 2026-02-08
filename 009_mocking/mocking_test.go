@@ -2,7 +2,7 @@ package mocking
 
 import (
 	"bytes"
-	"mocking/test_utils"
+	"github.com/adhitamafikri/go-with-test/mocking/test_utils"
 	"reflect"
 	"testing"
 	"time"
