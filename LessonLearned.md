@@ -113,6 +113,12 @@ Read: [Benchmarking](https://pkg.go.dev/testing#hdr-Benchmarks)
 - `chan struct{}` is the smallest data type available from a memory perspective, virtually no allocation. Perfect for a use case when we need to create a channel that does not send anything
 - Always use `make()` when creating channels, using `var channelName chan struct{}` or similar will initialize the variable with the "zero" value of the type, which is `nil`. When we try to send `nil` value, it will block forever because basically we cannot send `nil` to channels
 
+Key Differences
+| Syntax | Type | Behavior |
+|--------|------|----------|
+| make(chan string) | Unbuffered | Sender blocks until receiver is ready |
+| make(chan string, 1) | Buffered (size 1) | Can send 1 value without blocking |
+
 ## Select
 
 > `select` in Go is used to synchronize multiple channel operations
@@ -132,7 +138,6 @@ More on [https://gobyexample.com/select](https://gobyexample.com/select)
   - Closing files
   - Test Teardown, Cleaning up test mocks
 
-
 ## Reflection
 
 > This can be used to inspect the information/metadata of a variable. It can be used purely for inspection or manipulation
@@ -151,30 +156,45 @@ More on [https://gobyexample.com/select](https://gobyexample.com/select)
 - You might need to do recursive traversal if complex reflection operations are needed
 
 More on:
+
 - [https://dasarpemrogramangolang.novalagung.com/A-reflect.html](https://dasarpemrogramangolang.novalagung.com/A-reflect.html)
 - [https://pkg.go.dev/reflect](https://pkg.go.dev/reflect)
 - [https://pkg.go.dev/reflect#Value.Recv](https://pkg.go.dev/reflect#Value.Recv)
-
 
 ## Sync
 
 > Synchronization primitives such as mutual exclusion locks. Aims to improve the safety in concurrent environment
 
-| Type | Purpose |
-|------|---------|
-| Mutex | Mutual exclusion lock - protects shared data |
-| RWMutex | Reader/writer lock - multiple readers or one writer |
-| WaitGroup | Waits for a collection of goroutines to finish |
-| Once | Ensures code runs exactly once |
-| Pool | Thread-safe object pool for reuse |
-| Cond | Condition variable for signaling |
-| Map | Thread-safe map (concurrent reads/writes) |
+| Type      | Purpose                                             |
+| --------- | --------------------------------------------------- |
+| Mutex     | Mutual exclusion lock - protects shared data        |
+| RWMutex   | Reader/writer lock - multiple readers or one writer |
+| WaitGroup | Waits for a collection of goroutines to finish      |
+| Once      | Ensures code runs exactly once                      |
+| Pool      | Thread-safe object pool for reuse                   |
+| Cond      | Condition variable for signaling                    |
+| Map       | Thread-safe map (concurrent reads/writes)           |
 
 - `Mutex` ensures that only one goroutine can increment a value at a time.
-- `Mutex` must not be copied after the 1st use. Remember to 
+- `Mutex` must not be copied after the 1st use. Remember to
 - Run `go vet` in build scripts to get alert about subtle bugs
 - Make sure to pass the struct by reference instead of by value. The latter would cause the caller function to ctry and create a copy of the mutex
 
 More on:
+
 - [https://pkg.go.dev/sync](https://pkg.go.dev/sync)
 - [https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/sync](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/sync)
+
+## Context
+
+> This is the way to manage goroutines and long-running processes
+
+- Package context defines the Context type, which carries deadlines, cancellation signals, and other request-scoped values across API boundaries and between processes
+- It has `Done()` method which returns a channel which gets sent a signal when the context is "done" or "cancelled"
+- Incoming requests to a server should create a Context, and outgoing calls to servers should accept a Context. The chain of function calls between them must propagate the Context, optionally replacing it with a derived Context created using WithCancel, WithDeadline, WithTimeout, or WithValue. When a Context is canceled, all Contexts derived from it are also canceled
+
+More on:
+
+- [https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/context](https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/context)
+- [https://gobyexample.com/context](https://gobyexample.com/context)
+- [https://pkg.go.dev/context](https://pkg.go.dev/context)

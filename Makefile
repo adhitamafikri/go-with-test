@@ -77,3 +77,8 @@ sync:
 go_sync:
 	@go version
 	@cd 13_go_sync && go test -v -bench=. -benchmem -cover
+
+.PHONY: go_context
+go_context:
+	@go version
+	@cd 14_go_context && go test -v -bench=. -benchmem -cover
